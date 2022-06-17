@@ -2,7 +2,7 @@ import 'package:expense_app/core/usecase/usecase.dart';
 import 'package:expense_app/domain/entity/transaction.dart';
 import 'package:expense_app/domain/repository/transaction_repository.dart';
 
-class AddTransaction extends Usecase<void, Transaction> {
+class AddTransactionUseCase extends Usecase<void, Transaction> {
   final TransactionRepository _repository;
 
   @override
@@ -11,7 +11,7 @@ class AddTransaction extends Usecase<void, Transaction> {
     await _repository.addTransaction(param!);
   }
 
-  const AddTransaction({
+  const AddTransactionUseCase({
     required TransactionRepository repository,
   }) : _repository = repository;
 }

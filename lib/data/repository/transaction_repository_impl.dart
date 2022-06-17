@@ -8,13 +8,11 @@ class TransactionRepositoryImpl implements TransactionRepository {
   const TransactionRepositoryImpl(this._service);
 
   @override
-  Future<List<Transaction>> getAllTransactions() async => _service.generateMockData();
+  Future<List<Transaction>> getAllTransactions() async => _service.data;
 
   @override
-  Future<bool> addTransaction(Transaction transaction) {
-    // TODO: implement addTransaction
-    throw UnimplementedError();
-  }
+  Future<void> addTransaction(Transaction transaction) async =>
+      _service.addTransaction(transaction);
 
   @override
   Future<void> deleteTransaction(Transaction transaction) {
