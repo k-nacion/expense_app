@@ -20,17 +20,21 @@ class ExpenseTrackerApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
-    final transactionRepository =
-        TransactionRepositoryImpl(TransactionService());
+    final transactionRepos1 = TransactionRepositoryImpl(TransactionService());
+    final transactionRepos2 = TransactionRepositoryImpl(TransactionService());
+
+    print(identical(transactionRepos1, transactionRepos2));
+    print(transactionRepos2 == transactionRepos1);
 
     return MultiBlocProvider(
       providers: <BlocProvider>[
         BlocProvider<TransactionBloc>(
           create: (context) => TransactionBloc(
-            getTransactionsUseCase:
-                GetAllTransactionUseCase(repository: transactionRepository),
+            getTransactionsUseCase: GetAllTransactionUseCase(
+              repository: transactionRepos1,
+            ),
             addTransactionUseCase:
-                AddTransactionUseCase(repository: transactionRepository),
+                AddTransactionUseCase(repository: transactionRepos2),
           ),
         ),
         BlocProvider<TransactionFormCubit>(
