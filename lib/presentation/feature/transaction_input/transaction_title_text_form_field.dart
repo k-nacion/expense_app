@@ -7,10 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TransactionTitleTextFormField extends StatelessWidget {
   const TransactionTitleTextFormField({
     Key? key,
-    required this.titleController,
   }) : super(key: key);
-
-  final TextEditingController titleController;
 
   @override
   Widget build(BuildContext context) {
