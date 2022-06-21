@@ -27,10 +27,10 @@ class _HomepageState extends State<Homepage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const MarginAll(child: TransactionChartFeature()),
-          MarginHorizontal(child: TransactionInput()),
           const Flexible(child: TransactionListFeature()),
         ],
       ),
+      floatingActionButton: _buildFloatingActionButton(context),
     );
   }
 
@@ -39,4 +39,15 @@ class _HomepageState extends State<Homepage> {
     super.initState();
     context.read<TransactionBloc>().add(TransactionEventGetAllTransactions());
   }
+
+  Widget _buildFloatingActionButton(BuildContext context) =>
+      FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            builder: (context) => MarginHorizontal(child: TransactionInput()),
+            context: context,
+          );
+        },
+        child: const Icon(Icons.add),
+      );
 }
