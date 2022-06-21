@@ -23,9 +23,6 @@ class ExpenseTrackerApp extends StatelessWidget {
     final transactionRepos1 = TransactionRepositoryImpl(TransactionService());
     final transactionRepos2 = TransactionRepositoryImpl(TransactionService());
 
-    print(identical(transactionRepos1, transactionRepos2));
-    print(transactionRepos2 == transactionRepos1);
-
     return MultiBlocProvider(
       providers: <BlocProvider>[
         BlocProvider<TransactionBloc>(

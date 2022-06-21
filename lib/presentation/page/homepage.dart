@@ -25,9 +25,9 @@ class _HomepageState extends State<Homepage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const MarginAll(child: TransactionChartFeature()),
-          const Flexible(child: TransactionListFeature()),
+        children: const [
+          MarginAll(child: TransactionChartFeature()),
+          Flexible(child: TransactionListFeature()),
         ],
       ),
       floatingActionButton: _buildFloatingActionButton(context),
@@ -44,7 +44,8 @@ class _HomepageState extends State<Homepage> {
       FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-            builder: (context) => MarginHorizontal(child: TransactionInput()),
+            builder: (context) =>
+                const MarginHorizontal(child: TransactionInput()),
             context: context,
           );
         },
