@@ -21,7 +21,8 @@ class TransactionListFeature extends StatelessWidget {
 
             return ListView.separated(
                 itemBuilder: (context, index) => TransactionListItem(
-                    transaction: transactionList.transactions[index]),
+                    transaction:
+                        transactionList.transactions.reversed.elementAt(index)),
                 separatorBuilder: (context, index) => const SizedBox(height: 9),
                 itemCount: transactionList.transactions.length);
           }

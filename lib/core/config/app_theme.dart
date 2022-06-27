@@ -1,8 +1,9 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static ThemeData getLightTheme() {
+  /*static ThemeData getLightTheme() {
     return ThemeData(
       textTheme: GoogleFonts.notoSansTextTheme(),
       inputDecorationTheme: const InputDecorationTheme(
@@ -16,26 +17,27 @@ class AppTheme {
           foregroundColor: MaterialStateProperty.all(Colors.purple),
         ),
       ),
+      primarySwatch: Colors.blueGrey,
     );
-  }
+  }*/
 
-// static ThemeData getLightTheme() => FlexThemeData.light(
-//       scheme: FlexScheme.espresso,
-//       surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-//       blendLevel: 20,
-//       appBarOpacity: 0.95,
-//       tabBarStyle: FlexTabBarStyle.forBackground,
-//       swapColors: true,
-//       subThemesData: const FlexSubThemesData(
-//         blendOnLevel: 20,
-//         blendOnColors: false,
-//         inputDecoratorRadius: 6.0,
-//         bottomNavigationBarElevation: 23.0,
-//       ),
-//       visualDensity: FlexColorScheme.comfortablePlatformDensity,
-//       useMaterial3: true,
-//       textTheme: GoogleFonts.notoSansTextTheme(),
-//     );
+  static ThemeData getLightTheme() => FlexThemeData.light(
+        scheme: FlexScheme.espresso,
+        surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
+        blendLevel: 20,
+        appBarOpacity: 0.95,
+        tabBarStyle: FlexTabBarStyle.forBackground,
+        swapColors: true,
+        subThemesData: const FlexSubThemesData(
+          blendOnLevel: 20,
+          blendOnColors: false,
+          inputDecoratorRadius: 6.0,
+          bottomNavigationBarElevation: 23.0,
+        ),
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        useMaterial3: true,
+        textTheme: GoogleFonts.notoSansTextTheme(),
+      );
 
 // static ThemeData getDarkTheme() => FlexThemeData.dark(
 //       scheme: FlexScheme.espresso,

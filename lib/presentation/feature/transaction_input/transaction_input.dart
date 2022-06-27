@@ -42,6 +42,8 @@ class TransactionInput extends StatelessWidget {
                   context
                       .read<TransactionBloc>()
                       .add(TransactionEventAddTransaction(transaction));
+
+                  Navigator.pop(context);
                 },
                 child: const Text('Add transaction'),
               )

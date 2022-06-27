@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:expense_app/presentation/feature/transaction_chart/chart_per_day.dart';
 import 'package:flutter/material.dart';
 
 class TransactionChartFeature extends StatelessWidget {
@@ -8,13 +7,23 @@ class TransactionChartFeature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+      color: Theme.of(context).colorScheme.secondary,
       child: InkWell(
         onTap: () {},
         child: Container(
-          alignment: Alignment.center,
           height: 150,
-          child: const Text('Expense Chart'),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              ChartPerDay(),
+              ChartPerDay(),
+              ChartPerDay(),
+              ChartPerDay(),
+              ChartPerDay(),
+              ChartPerDay(),
+              ChartPerDay(),
+            ],
+          ),
         ),
       ),
     );
