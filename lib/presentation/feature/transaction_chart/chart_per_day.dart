@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class ChartPerDay extends StatelessWidget {
   const ChartPerDay({
     Key? key,
-    required this.averageAmountPerDay,
+    required this.amountPercentage,
     required this.dateNum,
     required this.dateText,
     this.isToday = false,
   }) : super(key: key);
 
-  final double averageAmountPerDay;
+  final double amountPercentage;
 
   /// This property represent the weekday of the day and will show up in the [above] part.
   final String dateText;
@@ -34,36 +34,32 @@ class ChartPerDay extends StatelessWidget {
             style: TextStyle(color: textColor),
           ),
         ),
-        const Expanded(
+        Expanded(
           child: RotatedBox(
             quarterTurns: 3,
             child: LinearProgressIndicator(
               backgroundColor: Colors.black,
-              value: .3,
+              value: amountPercentage,
             ),
           ),
         ),
-        MarginVertical(
-          topMargin: 8,
-          bottomMargin: 8,
-          child: Text(
-            dateText,
-            style: TextStyle(color: textColor),
-          ),
-        ),
-        MarginVertical(
-          bottomMargin: 12,
-          child: Text(
-            dateNum,
-            style: TextStyle(
-                color: isToday
-                    ? Theme.of(context).floatingActionButtonTheme.backgroundColor
-                    : textColor),
-          ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              dateText,
+              style: TextStyle(color: textColor),
+            ),
+            Text(
+              dateNum,
+              style: TextStyle(
+                  color: isToday
+                      ? Theme.of(context).floatingActionButtonTheme.backgroundColor
+                      : textColor),
+            ),
+          ],
         ),
       ],
     );
   }
 }
-
-enum ChartDay { Sun, Mon, Tue, Wed, Thu, Fri, Sat }

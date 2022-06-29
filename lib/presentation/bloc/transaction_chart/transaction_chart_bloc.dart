@@ -27,6 +27,7 @@ class TransactionChartBloc extends Bloc<TransactionChartEvent, TransactionChartS
     for (int index = 0; index < 7; index++) {
       final dayFromOneWeek = oneWeekAgoBreakpoint.add(Duration(days: index));
 
+      //todo: transform this to List.fold();
       double totalExpenseInOneDay = 0;
       for (final transaction in oneWeekTransaction) {
         if (transaction.date.weekday == dayFromOneWeek.weekday) {

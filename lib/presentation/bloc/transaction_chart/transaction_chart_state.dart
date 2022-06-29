@@ -1,7 +1,7 @@
 part of 'transaction_chart_bloc.dart';
 
 abstract class TransactionChartState extends Equatable {
-  final double maximumExpenseLimit = 5000;
+  static double maximumExpenseLimit = 5000;
 
   const TransactionChartState();
 
