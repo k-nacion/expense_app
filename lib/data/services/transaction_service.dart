@@ -11,7 +11,7 @@ class TransactionService {
 
   factory TransactionService() => _instance;
 
-  final List<Transaction> _data = List<Transaction>.generate(10, (index) {
+  static final List<Transaction> _data = List<Transaction>.generate(10, (index) {
     final title = lorem(paragraphs: 1, words: 3);
     final amount = (Random().nextDouble() + 1) * 1000;
     final date = DateTime.now().subtract(

@@ -4,6 +4,7 @@ import 'package:expense_app/data/services/transaction_service.dart';
 import 'package:expense_app/domain/usecase/add_transaction_usecase.dart';
 import 'package:expense_app/domain/usecase/get_all_transaction_usecase.dart';
 import 'package:expense_app/presentation/bloc/transaction/transaction_bloc.dart';
+import 'package:expense_app/presentation/bloc/transaction_chart/transaction_chart_bloc.dart';
 import 'package:expense_app/presentation/bloc/transaction_form_cubit/transaction_form_cubit.dart';
 import 'package:expense_app/presentation/page/homepage.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,9 @@ class ExpenseTrackerApp extends StatelessWidget {
         BlocProvider<TransactionFormCubit>(
           create: (context) => TransactionFormCubit(),
         ),
+        BlocProvider<TransactionChartBloc>(
+          create: (context) => TransactionChartBloc(),
+        )
       ],
       child: MaterialApp(
         title: 'Expense Tracker',
