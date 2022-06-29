@@ -28,7 +28,7 @@ class TransactionChartBloc extends Bloc<TransactionChartEvent, TransactionChartS
 
     final List<Map<DateTime, double>> totalExpenseInWeek = [];
 
-    for (int index = 0; index < 7; index++) {
+    for (int index = 1; index <= 7; index++) {
       final dayFromOneWeek = oneWeekAgoBreakpoint.add(Duration(days: index));
 
       double totalExpenseInOneDay = oneWeekTransaction.fold<double>(
