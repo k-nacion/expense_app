@@ -37,6 +37,7 @@ class TransactionChartFeature extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: state.oneWeekTransaction
             .map((e) => ChartPerDay(
+                totalSpendingForTheDay: e.values.single,
                 amountPercentage: e.values.single / TransactionChartState.maximumExpenseLimit,
                 dateNum: e.keys.single.day.toString(),
                 dateText: ChartDay.values[e.keys.single.weekday - 1].name))
