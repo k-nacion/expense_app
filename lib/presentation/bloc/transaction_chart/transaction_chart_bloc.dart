@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:expense_app/domain/entity/transaction.dart';
@@ -8,6 +10,8 @@ part 'transaction_chart_state.dart';
 class TransactionChartBloc extends Bloc<TransactionChartEvent, TransactionChartState> {
   TransactionChartBloc() : super(TransactionChartStateLoading()) {
     on<TransactionChartEventFetchChart>((event, emit) => _mapEventFetchDataToState(event, emit));
+    on<TransactionChartEventRestartState>(
+        (event, emit) => _mapEventRestartStateToState(event, emit));
   }
 
   void _mapEventFetchDataToState(
@@ -27,17 +31,29 @@ class TransactionChartBloc extends Bloc<TransactionChartEvent, TransactionChartS
     for (int index = 0; index < 7; index++) {
       final dayFromOneWeek = oneWeekAgoBreakpoint.add(Duration(days: index));
 
-      //todo: transform this to List.fold();
-      double totalExpenseInOneDay = 0;
-      for (final transaction in oneWeekTransaction) {
+      double totalExpenseInOneDay = oneWeekTransaction.fold<double>(
+          0.0,
+          (previousValue, element) => element.date.weekday == dayFromOneWeek.weekday
+              ? previousValue + element.amount
+              : previousValue);
+      /*for (final transaction in oneWeekTransaction) {
         if (transaction.date.weekday == dayFromOneWeek.weekday) {
           totalExpenseInOneDay += transaction.amount;
         }
         continue;
-      }
+      }*/
+
       totalExpenseInWeek.add({dayFromOneWeek: totalExpenseInOneDay});
     }
 
     emit(TransactionChartStateLoaded(oneWeekTransaction: totalExpenseInWeek));
+  }
+
+  void _mapEventRestartStateToState(
+    TransactionChartEventRestartState event,
+    Emitter<TransactionChartState> emit,
+  ) async {
+    emit(TransactionChartStateLoading());
+    await Future.delayed(Duration(seconds: Random().nextInt(3)));
   }
 }

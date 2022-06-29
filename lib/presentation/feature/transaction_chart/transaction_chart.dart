@@ -33,24 +33,15 @@ class TransactionChartFeature extends StatelessWidget {
 
   Widget _buildLoadingState() => const Center(child: CircularProgressIndicator.adaptive());
 
-  Widget _buildLoadedState(BuildContext context, TransactionChartStateLoaded state) {
-    /*return Center(
-      child: ChartPerDay(
-          amountPercentage:
-          dateNum: state.oneWeekTransaction.first.keys.single.day.toString(),
-          dateText: ChartDay.values[state.oneWeekTransaction.first.keys.single.weekday - 1].name),
-    );*/
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: state.oneWeekTransaction
-          .map((e) => ChartPerDay(
-              amountPercentage: e.values.single / TransactionChartState.maximumExpenseLimit,
-              dateNum: e.keys.single.day.toString(),
-              dateText: ChartDay.values[e.keys.single.weekday - 1].name))
-          .toList(),
-    );
-  }
+  Widget _buildLoadedState(BuildContext context, TransactionChartStateLoaded state) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: state.oneWeekTransaction
+            .map((e) => ChartPerDay(
+                amountPercentage: e.values.single / TransactionChartState.maximumExpenseLimit,
+                dateNum: e.keys.single.day.toString(),
+                dateText: ChartDay.values[e.keys.single.weekday - 1].name))
+            .toList(),
+      );
 
   Widget _buildErrorState() => const Center(child: Text('There are problems fetching the chart'));
 }

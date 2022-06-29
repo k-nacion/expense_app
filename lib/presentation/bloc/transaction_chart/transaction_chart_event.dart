@@ -7,6 +7,8 @@ abstract class TransactionChartEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class TransactionChartEventRestartState extends TransactionChartEvent {}
+
 class TransactionChartEventFetchChart extends TransactionChartEvent {
   final List<Transaction> allTransaction;
 

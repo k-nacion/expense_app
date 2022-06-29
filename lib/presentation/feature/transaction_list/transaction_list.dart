@@ -19,6 +19,7 @@ class _TransactionListFeatureState extends State<TransactionListFeature> {
       child: BlocBuilder<TransactionBloc, TransactionState>(
         builder: (context, state) {
           if (state is TransactionStateLoading) {
+            context.read<TransactionChartBloc>().add(TransactionChartEventRestartState());
             return _buildLoadingState();
           } else if (state is TransactionStateLoaded) {
             return _buildLoadedState(context, state);
@@ -34,8 +35,7 @@ class _TransactionListFeatureState extends State<TransactionListFeature> {
         child: CircularProgressIndicator.adaptive(),
       );
 
-  Widget _buildLoadedState(
-      BuildContext context, TransactionStateLoaded stateLoaded) {
+  Widget _buildLoadedState(BuildContext context, TransactionStateLoaded stateLoaded) {
     stateLoaded
       ..sortByDate()
       ..reverse();
@@ -47,8 +47,8 @@ class _TransactionListFeatureState extends State<TransactionListFeature> {
         .add(TransactionChartEventFetchChart(allTransaction: transactions));
 
     return ListView.separated(
-        itemBuilder: (context, index) => TransactionListItem(
-            transaction: transactions.reversed.elementAt(index)),
+        itemBuilder: (context, index) =>
+            TransactionListItem(transaction: transactions.reversed.elementAt(index)),
         separatorBuilder: (context, index) => const SizedBox(height: 9),
         itemCount: transactions.length);
   }
