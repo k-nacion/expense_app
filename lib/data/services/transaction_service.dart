@@ -26,4 +26,6 @@ class TransactionService {
   List<Transaction> get data => _data;
 
   void addTransaction(Transaction transaction) => _data.add(transaction);
+
+  void deleteTransaction(Transaction transaction) => _data.remove(transaction);
 }

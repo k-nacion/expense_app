@@ -17,14 +17,11 @@ class TransactionListItem extends StatelessWidget {
 
     return Card(
       elevation: 4,
-      child: InkWell(
-        onTap: () {},
-        child: ListTile(
-          leading: TransactionPrice(price: transaction.amount),
-          title: Text(transaction.title),
-          subtitle: Text(dateFormatter.format(transaction.date)),
-          // subtitle: Text(),
-        ),
+      child: ListTile(
+        leading: TransactionPrice(price: transaction.amount),
+        title: Text(transaction.title),
+        subtitle: Text(dateFormatter.format(transaction.date)),
+        // subtitle: Text(),
       ),
     );
   }

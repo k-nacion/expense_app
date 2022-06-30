@@ -18,8 +18,6 @@ class TransactionRepositoryImpl implements TransactionRepository {
       _service.addTransaction(transaction);
 
   @override
-  Future<void> deleteTransaction(Transaction transaction) {
-    // TODO: implement deleteTransaction
-    throw UnimplementedError();
-  }
+  Future<void> deleteTransaction(Transaction transaction) async =>
+      _service.deleteTransaction(transaction);
 }
