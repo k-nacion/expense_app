@@ -43,7 +43,7 @@ class TransactionInput extends StatelessWidget {
                   final transaction = TransactionModel(
                       title: cubitState.titleText,
                       amount: double.parse(cubitState.amountText),
-                      date: DateTime.now());
+                      date: context.read<TransactionFormCubit>().state.transactionDate);
                   context.read<TransactionBloc>().add(TransactionEventAddTransaction(transaction));
 
                   Navigator.pop(context);
