@@ -40,6 +40,9 @@ dependencies:
   intl: ^0.17.0
   shared_preferences: ^2.0.15
   dartz: ^0.10.1
+  flex_color_scheme: ^5.0.1
+  fl_chart: ^0.55.0
+  flutter_lorem: ^2.0.0
 
 dev_dependencies:
   flutter_test:

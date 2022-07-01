@@ -2,8 +2,10 @@ import 'package:expense_app/core/config/app_theme.dart';
 import 'package:expense_app/data/repository/transaction_repository_impl.dart';
 import 'package:expense_app/data/services/transaction_service.dart';
 import 'package:expense_app/domain/usecase/add_transaction_usecase.dart';
+import 'package:expense_app/domain/usecase/delete_transaction_usecase.dart';
 import 'package:expense_app/domain/usecase/get_all_transaction_usecase.dart';
 import 'package:expense_app/presentation/bloc/transaction/transaction_bloc.dart';
+import 'package:expense_app/presentation/bloc/transaction_chart/transaction_chart_bloc.dart';
 import 'package:expense_app/presentation/bloc/transaction_form_cubit/transaction_form_cubit.dart';
 import 'package:expense_app/presentation/page/homepage.dart';
 import 'package:flutter/material.dart';
@@ -15,31 +17,28 @@ void main() => runApp(const ExpenseTrackerApp());
 class ExpenseTrackerApp extends StatelessWidget {
   const ExpenseTrackerApp({Key? key}) : super(key: key);
 
+  static final _transactionRepository = TransactionRepositoryImpl(TransactionService());
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
-    final transactionRepos1 = TransactionRepositoryImpl(TransactionService());
-    final transactionRepos2 = TransactionRepositoryImpl(TransactionService());
-
-    print(identical(transactionRepos1, transactionRepos2));
-    print(transactionRepos2 == transactionRepos1);
-
     return MultiBlocProvider(
       providers: <BlocProvider>[
         BlocProvider<TransactionBloc>(
           create: (context) => TransactionBloc(
-            getTransactionsUseCase: GetAllTransactionUseCase(
-              repository: transactionRepos1,
-            ),
-            addTransactionUseCase:
-                AddTransactionUseCase(repository: transactionRepos2),
+            getTransactionsUseCase: GetAllTransactionUseCase(repository: _transactionRepository),
+            addTransactionUseCase: AddTransactionUseCase(repository: _transactionRepository),
+            deleteTransactionUseCase: DeleteTransactionUseCase(repository: _transactionRepository),
           ),
         ),
         BlocProvider<TransactionFormCubit>(
           create: (context) => TransactionFormCubit(),
         ),
+        BlocProvider<TransactionChartBloc>(
+          create: (context) => TransactionChartBloc(),
+        )
       ],
       child: MaterialApp(
         title: 'Expense Tracker',

@@ -12,6 +12,14 @@ class MarginHorizontal extends StatelessWidget {
     this.right = 22,
   }) : super(key: key);
 
+  const MarginHorizontal.symmetrical({
+    Key? key,
+    required this.child,
+    required double size,
+  })  : left = size,
+        right = size,
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -14,6 +14,12 @@ class TransactionStateLoaded extends TransactionState {
 
   const TransactionStateLoaded(this.transactions);
 
+  void reverse() => transactions.reversed.toList(growable: false);
+
+  void sortByDate() => transactions.sort(
+        (Transaction a, Transaction b) => a.date.compareTo(b.date),
+      );
+
   @override
   List<Object> get props => [transactions];
 }

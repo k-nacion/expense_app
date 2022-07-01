@@ -5,10 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TransactionAmountTextFormField extends StatelessWidget {
   const TransactionAmountTextFormField({
     Key? key,
-    required this.amountController,
   }) : super(key: key);
-
-  final TextEditingController amountController;
 
   @override
   Widget build(BuildContext context) {
