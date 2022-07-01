@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
@@ -12,20 +13,22 @@ part 'transaction_state.dart';
 class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   final Usecase<List<Transaction>, void> _getAllTransactionsUsecase;
   final Usecase<void, Transaction> _addTransactionUsecase;
+  final Usecase<void, Transaction> _deleteTransactionUsecase;
 
   TransactionBloc({
     required Usecase<List<Transaction>, void> getTransactionsUseCase,
     required Usecase<void, Transaction> addTransactionUseCase,
+    required Usecase<void, Transaction> deleteTransactionUseCase,
   })  : _getAllTransactionsUsecase = getTransactionsUseCase,
         _addTransactionUsecase = addTransactionUseCase,
+        _deleteTransactionUsecase = deleteTransactionUseCase,
         super(TransactionStateLoading()) {
-    on<TransactionEventGetAllTransactions>(
-        (event, emit) => _mapGetAllTransactionToEvent(event, emit));
-    on<TransactionEventAddTransaction>(
-        (event, emit) => _mapAddTransactionEventToState(event, emit));
+    on<TransactionEventGetAllTransactions>(_mapGetAllTransactionToEvent);
+    on<TransactionEventAddTransaction>(_mapAddTransactionEventToState);
+    on<TransactionEventDeleteTransaction>(_mapEventDeleteToState);
   }
 
-  void _mapGetAllTransactionToEvent(
+  Future<void> _mapGetAllTransactionToEvent(
     TransactionEventGetAllTransactions event,
     Emitter<TransactionState> emit,
   ) async {
@@ -36,12 +39,20 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     emit(TransactionStateLoaded(transactionList));
   }
 
-  void _mapAddTransactionEventToState(
+  Future<void> _mapAddTransactionEventToState(
     TransactionEventAddTransaction event,
     Emitter<TransactionState> emit,
   ) async {
     final transaction = event.transaction;
     await _addTransactionUsecase(transaction);
+    add(TransactionEventGetAllTransactions());
+  }
+
+  void _mapEventDeleteToState(
+    TransactionEventDeleteTransaction event,
+    Emitter<TransactionState> emit,
+  ) async {
+    await _deleteTransactionUsecase(event.transaction);
     add(TransactionEventGetAllTransactions());
   }
 }

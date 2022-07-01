@@ -13,6 +13,8 @@ class TransactionListFeature extends StatefulWidget {
 }
 
 class _TransactionListFeatureState extends State<TransactionListFeature> {
+  BouncingScrollPhysics bouncingScrollPhysics = const BouncingScrollPhysics();
+
   @override
   Widget build(BuildContext context) {
     return MarginHorizontal(
@@ -47,6 +49,7 @@ class _TransactionListFeatureState extends State<TransactionListFeature> {
         .add(TransactionChartEventFetchChart(allTransaction: transactions));
 
     return ListView.separated(
+        physics: bouncingScrollPhysics,
         itemBuilder: (context, index) =>
             TransactionListItem(transaction: transactions.reversed.elementAt(index)),
         separatorBuilder: (context, index) => const SizedBox(height: 9),
