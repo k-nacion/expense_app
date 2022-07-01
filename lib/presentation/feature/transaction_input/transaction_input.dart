@@ -2,6 +2,7 @@ import 'package:expense_app/data/model/TransactionModel.dart';
 import 'package:expense_app/presentation/bloc/transaction/transaction_bloc.dart';
 import 'package:expense_app/presentation/bloc/transaction_form_cubit/transaction_form_cubit.dart';
 import 'package:expense_app/presentation/feature/transaction_input/transaction_amount_text_form_field.dart';
+import 'package:expense_app/presentation/feature/transaction_input/transaction_date_picker.dart';
 import 'package:expense_app/presentation/feature/transaction_input/transaction_title_text_form_field.dart';
 import 'package:expense_app/presentation/widgets/margin_vertical.dart';
 import 'package:expense_app/presentation/widgets/padding_vertical.dart';
@@ -31,6 +32,10 @@ class TransactionInput extends StatelessWidget {
                 topMargin: 0,
                 child: TransactionAmountTextFormField(),
               ),
+              MarginVertical(
+                topMargin: 0,
+                child: TransactionDatePicker(),
+              ),
               TextButton(
                 onPressed: () {
                   globalKey.currentState!.save();
@@ -39,9 +44,7 @@ class TransactionInput extends StatelessWidget {
                       title: cubitState.titleText,
                       amount: double.parse(cubitState.amountText),
                       date: DateTime.now());
-                  context
-                      .read<TransactionBloc>()
-                      .add(TransactionEventAddTransaction(transaction));
+                  context.read<TransactionBloc>().add(TransactionEventAddTransaction(transaction));
 
                   Navigator.pop(context);
                 },
